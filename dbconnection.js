@@ -36,9 +36,9 @@ function getRandomNumber(l, r) {
 
 function getImageByColor(rgbColor, func) {
     try {
-        color = rgb2yuv(rgbColor);
-        COLOR_THRESH = 20000;
-        sqlQuery = "select image_url,\n" +
+        var color = rgb2yuv(rgbColor);
+        var COLOR_THRESH = 20000;
+        var sqlQuery = "select image_url,\n" +
             "(POW(" + color.u + " - X(colorUV),2) + POW(" + color.v + " - Y(colorUV),2)) AS dist\n" +
             "from photos\n" +
             "having dist < " + COLOR_THRESH + " order by dist;";
@@ -61,9 +61,9 @@ var server = http.createServer(function(req, res) {
     try {
         console.log("this is a new server!");
         console.log(req.url)
-        parsed_query = url.parse(req.url, true).query;
+        var parsed_query = url.parse(req.url, true).query;
         console.log(parsed_query)
-        query_color = {
+        var query_color = {
             r: Number(parsed_query["r"]),
             g: Number(parsed_query["g"]),
             b: Number(parsed_query["b"])
