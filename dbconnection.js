@@ -36,9 +36,9 @@ function getRandomNumber(l, r) {
 
 function getImageByColor(rgbColor, func) {
     try {
-        color = rgb2yuv(rgbColor);
-        COLOR_THRESH = 20000;
-        sqlQuery = "select description, image_url, rating, vote, width, height,\n" +
+        var color = rgb2yuv(rgbColor);
+        var COLOR_THRESH = 20000;
+        var sqlQuery = "select description, image_url, rating, vote, width, height,\n" +
             "(POW(" + color.u + " - X(colorUV),2) + POW(" + color.v + " - Y(colorUV),2)) AS dist\n" +
             "from photos\n" +
             "having dist < " + COLOR_THRESH + "&& width > height * 1.5" + "&& vote >= 0" + " order by dist;";
